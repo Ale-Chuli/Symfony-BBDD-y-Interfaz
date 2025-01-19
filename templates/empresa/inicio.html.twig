@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Página de inicio</title>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+</head>
+<body>
+    <h1>Bienvenido al sistema de gestión de la Empresa</h1>
+
+    <ul>
+        <li><a href="{{ path('app_oficinas') }}">Ver Oficinas</a></li>
+        <li><a href="{{ path('app_empleados') }}">Ver Empleados</a></li>
+        <li><a href="{{ path('app_crear_oficinas') }}">Crear Oficina</a></li>
+    </ul>
+
+    <!-- Formulario para ingresar el número de empleado -->
+    <h2>Actualizar Empleado</h2>
+    <form action="{{ path('app_inicio') }}" method="get">
+        <label for="numero_empleado">Introduce el número del empleado:</label>
+        <input type="number" id="numero_empleado" name="numero_empleado" required>
+        <button type="submit">Actualizar</button>
+    </form>
+
+</body>
+</html>
+
+

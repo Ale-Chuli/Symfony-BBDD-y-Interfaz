@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crear Oficina</title>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+</head>
+<body>
+    <h1>Crear Nueva Oficina</h1>
+    {{ form_start(form) }}
+    {{ form_row(form.numero) }}
+    {{ form_row(form.nombre) }}
+    {{ form_row(form.direccion) }}
+    {{ form_row(form.ciudad) }}
+    <button type="submit">Crear Oficina</button>
+    {{ form_end(form) }}
+    <br><a href="{{ path('app_inicio') }}">Volver al Inicio</a>
+</body>
+</html>

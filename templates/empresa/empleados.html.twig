@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Listado de Empleados</title>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+</head>
+<body>
+    <h1>Empleados</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Número</th>
+                <th>Nombre</th>
+                <th>Apellidos</th>
+                <th>Edad</th>
+                <th>Puesto</th>
+                <th>Correo</th>
+                <th>Oficina</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for empleado in empleados %}
+                <tr>
+                    <td>{{ empleado.numero }}</td>
+                    <td>{{ empleado.nombre }}</td>
+                    <td>{{ empleado.apellidos }}</td>
+                    <td>{{ empleado.edad }}</td>
+                    <td>{{ empleado.puesto }}</td>
+                    <td>{{ empleado.email }}</td>
+                    <td>{{ empleado.oficina.nombre }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br><a href="{{ path('app_inicio') }}">Volver al Inicio</a>
+</body>
+</html>

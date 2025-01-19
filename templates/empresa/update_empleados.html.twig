@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Actualizar Empleado</title>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+</head>
+<body>
+    <h1>Actualizar Empleado</h1>
+
+    <h2>Empleado: {{ empleado.nombre }} {{ empleado.apellidos }}</h2>
+
+    {{ form_start(form) }}
+    {{ form_row(form.numero) }}
+    {{ form_row(form.nombre) }}
+    {{ form_row(form.apellidos) }}
+    {{ form_row(form.edad) }}
+    {{ form_row(form.puesto) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.oficina) }}
+    
+    <button type="submit">Actualizar Empleado</button>
+    {{ form_end(form) }}
+
+    <br>
+    <a href="{{ path('app_empleados') }}">Volver al listado de empleados</a>
+    <br><a href="{{ path('app_inicio') }}">Volver al Inicio</a>
+</body>
+</html>
+
