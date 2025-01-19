@@ -14,22 +14,18 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class EmpresaController extends AbstractController
 {
-    // Página de inicio
     #[Route('/inicio', name: 'app_inicio')]
     public function inicio(Request $request): Response
     {
-        // Verificamos si se envió el número del empleado para redirigir a la página de actualización
         $numeroEmpleado = $request->query->get('numero_empleado');
         
         if ($numeroEmpleado) {
-            // Redirigimos correctamente al método de actualización del empleado pasando el número como parámetro
             return $this->redirectToRoute('app_update_empleados', ['numero' => $numeroEmpleado]);
         }
 
         return $this->render('empresa/inicio.html.twig');
     }
 
-    // Ver listado de todas las oficinas
     #[Route('/oficinas', name: 'app_oficinas')]
     public function oficinas(EntityManagerInterface $em): Response
     {
@@ -39,7 +35,6 @@ class EmpresaController extends AbstractController
         ]);
     }
 
-    // Ver listado de todos los empleados
     #[Route('/empleados', name: 'app_empleados')]
     public function empleados(EntityManagerInterface $em): Response
     {
@@ -49,7 +44,6 @@ class EmpresaController extends AbstractController
         ]);
     }
 
-    // Crear una nueva oficina
     #[Route('/crear_oficinas', name: 'app_crear_oficinas')]
     public function crearOficina(Request $request, EntityManagerInterface $em): Response
     {
@@ -68,7 +62,6 @@ class EmpresaController extends AbstractController
         ]);
     }
 
-    // Actualizar datos de un empleado
     #[Route('/update_empleados/{numero}', name: 'app_update_empleados')]
     public function updateEmpleado(Request $request, EntityManagerInterface $em, $numero): Response
     {

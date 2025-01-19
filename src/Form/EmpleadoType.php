@@ -1,7 +1,5 @@
 <?php
 
-// src/Form/EmpleadoType.php
-
 namespace App\Form;
 
 use App\Entity\Empleado;
