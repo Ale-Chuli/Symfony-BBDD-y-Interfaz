@@ -11,6 +11,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 
 class EmpresaController extends AbstractController
@@ -53,7 +55,7 @@ class EmpresaController extends AbstractController
     }
 
     #[Route('/crear_oficinas', name: 'app_crear_oficinas')]
-    public function crearOficina(Request $request, EntityManagerInterface $em): Response
+    public function crearOficina(Request $request, EntityManagerInterface $em, MailerInterface $mailer): Response
     {
         $oficina = new Oficina();
         $form = $this->createForm(OficinaType::class, $oficina);
@@ -62,6 +64,16 @@ class EmpresaController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($oficina);
             $em->flush();
+
+            $email = new Email();
+            /*$email -> from('ejemplo@gmail.com');
+            $email -> to('ejemplo@gmail.com');*/
+            $email -> subject('Nueva oficina');
+            $email -> text('Se ha añadido la nueva oficina: '. $oficina->getNombre());
+
+            $mailer-> send($email);
+
+            $this->addFlash('success', 'Oficina creada y correo enviado correctamente.');
             return $this->redirectToRoute('app_oficinas');
         }
 
@@ -71,7 +83,7 @@ class EmpresaController extends AbstractController
     }
 
     #[Route('/update_empleados/{numero}', name: 'app_update_empleados')]
-    public function updateEmpleado(Request $request, EntityManagerInterface $em, $numero): Response
+    public function updateEmpleado(Request $request, EntityManagerInterface $em, $numero, MailerInterface $mailer): Response
     {
         $empleado = $em->getRepository(Empleado::class)->findOneBy(['numero' => $numero]);
 
@@ -85,6 +97,15 @@ class EmpresaController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
+
+            $email = new Email();
+            /*$email -> from('ejemplo@gmail.com');
+            $email -> to('ejemplo@gmail.com');*/
+            $email -> subject('Datos de empleado actualizados');
+            $email -> text('Se han actualizado los datos del empleado: '. $empleado->getNombre());
+
+            $mailer-> send($email);
+
             return $this->redirectToRoute('app_empleados');
         }
 
